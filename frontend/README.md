@@ -1,12 +1,87 @@
-# React + Vite
+# Frontend - Book Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** of the Book Manager App built using  **Vite + React** . It allows users to register, log in, and manage book listings with a clean, modern UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+* **Vite**
+* **React**
+* **React Router DOM**
+* **Axios**
+* **Tailwind CSS**
+* **Prisma (via API)**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📁 Project Structure
+
+```
+frontend/
+├── public/
+├── src/
+│   ├── components/
+│   ├── context/
+│   │   ├── AuthProvider.jsx
+│   │   └── AuthContext.js
+│   ├── pages/
+│   ├── services/
+│   │   └── api.js
+│   ├── utils/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── .env
+├── package.json
+└── vite.config.js
+```
+
+---
+
+## 🔧 Setup Instructions
+
+### 1. Navigate to frontend directory
+
+```bash
+cd frontend
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set environment variables
+
+Create a `.env` file:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+### 4. Run development server
+
+```bash
+npm run dev
+```
+
+Visit [http://localhost:5173](http://localhost:5173/) to view the app.
+
+---
+
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+---
+
+## ⚠️ Notes
+
+* Ensure backend is running on the correct port configured in `.env`
+* All auth logic is managed via `AuthProvider.jsx`
+
+---

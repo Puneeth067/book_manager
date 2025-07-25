@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? ['https://your-frontend-url.vercel.app']
-    : ['http://localhost:3000'],
+    : ['http://localhost:5173'],
   credentials: true
 }));
 app.use(express.json());
