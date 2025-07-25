@@ -11,7 +11,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
           onClick={onClose}
         ></div>
 
-        <div className="inline-block w-full max-w-md p-0 my-8 overflow-hidden text-left align-middle transition-all duration-300 transform bg-white shadow-2xl rounded-2xl animate-in slide-in-from-bottom-4 fade-in">
+        <div className="inline-block w-[90vw] max-w-6xl p-0 my-8 overflow-hidden text-left align-middle transition-all duration-300 transform bg-white shadow-2xl rounded-2xl animate-in slide-in-from-bottom-4 fade-in">
           {/* Header with gradient */}
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 rounded-t-2xl">
             <div className="flex justify-between items-center">

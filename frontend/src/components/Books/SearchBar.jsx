@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 const SearchBar = ({ books, onFilteredBooks, className = '' }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'title', 'author'
 
-  useEffect(() => {
-    const filtered = books.filter(book => {
-      const term = searchTerm.toLowerCase().trim();
-      if (!term) return true;
+   // Memoize the filtered books so filtering is done only when deps change
+  const filtered = useMemo(() => {
+    const term = searchTerm.toLowerCase().trim();
+    if (!term) return books;
 
+    return books.filter(book => {
       switch (activeFilter) {
         case 'title':
           return book.title.toLowerCase().includes(term);
         case 'author':
           return book.author.toLowerCase().includes(term);
         default:
-          return book.title.toLowerCase().includes(term) || 
-                 book.author.toLowerCase().includes(term);
+          return book.title.toLowerCase().includes(term) || book.author.toLowerCase().includes(term);
       }
     });
+  }, [books, searchTerm, activeFilter]);
+
+  // Call onFilteredBooks only when filtered changes
+  useEffect(() => {
     onFilteredBooks(filtered);
-  }, [searchTerm, activeFilter, books, onFilteredBooks]);
+  }, [filtered, onFilteredBooks]);
 
   const clearSearch = () => {
     setSearchTerm('');

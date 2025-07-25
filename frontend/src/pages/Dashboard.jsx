@@ -78,7 +78,16 @@ const Dashboard = () => {
   };
 
   const handleFilteredBooks = (filtered) => {
-    setFilteredBooks(filtered);
+    setFilteredBooks(prev => {
+      if (
+        prev.length === filtered.length &&
+        prev.every((book, i) => book.id === filtered[i].id)
+      ) {
+        // No change, skip state update
+        return prev;
+      }
+      return filtered;
+    });
   };
 
   return (
