@@ -56,7 +56,7 @@ const Home = () => {
             <>
               <Link to="/auth" className="transform hover:scale-105 transition-all duration-300">
                 <Button size="lg" className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-xl hover:shadow-2xl">
-                  Get Started
+                  Get Started!
                 </Button>
               </Link>
             </>
