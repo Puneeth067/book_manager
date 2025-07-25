@@ -1,9 +1,9 @@
 import React from 'react';
 import Button from '../UI/Button';
 
-const BookCard = ({ book, onEdit, onDelete }) => {
+const BookCard = ({ book, onEdit, onDelete, onView }) => {
   return (
-    <div className="group bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 hover:border-indigo-200 transform hover:-translate-y-1 min-h-0 overflow-hidden">
+    <div className="group bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 hover:border-indigo-200 transform hover:-translate-y-1 min-h-0 overflow-hidden px-4 py-6 flex flex-col justify-between relative">
       <div className="flex flex-col h-full">
         <div className="flex-1 min-h-0">
           <div className="flex items-start mb-3">
@@ -40,6 +40,17 @@ const BookCard = ({ book, onEdit, onDelete }) => {
             <span className="truncate">Added {new Date(book.createdAt).toLocaleDateString()}</span>
           </div>
           <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => onView(book)}
+            >
+              <svg className="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              View
+            </Button>
             <Button
               variant="outline"
               size="sm"

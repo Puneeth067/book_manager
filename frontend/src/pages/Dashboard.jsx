@@ -3,6 +3,8 @@ import { useAuth } from '../hooks/useAuth';
 import { useBooks } from '../hooks/useBooks';
 import BookList from '../components/Books/BookList';
 import BookForm from '../components/Books/BookForm';
+import SearchBar from '../components/Books/SearchBar';
+import BookViewModal from '../components/Books/BookViewModal';
 import Modal from '../components/UI/Modal';
 import Button from '../components/UI/Button';
 
@@ -12,6 +14,14 @@ const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBook, setEditingBook] = useState(null);
   const [formLoading, setFormLoading] = useState(false);
+  const [filteredBooks, setFilteredBooks] = useState(books);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [viewingBook, setViewingBook] = useState(null);
+
+  // Update filtered books when books change
+  React.useEffect(() => {
+    setFilteredBooks(books);
+  }, [books]);
 
   const handleAddBook = () => {
     setEditingBook(null);
@@ -21,6 +31,16 @@ const Dashboard = () => {
   const handleEditBook = (book) => {
     setEditingBook(book);
     setIsModalOpen(true);
+  };
+
+  const handleViewBook = (book) => {
+    setViewingBook(book);
+    setIsViewModalOpen(true);
+  };
+
+  const handleCloseViewModal = () => {
+    setIsViewModalOpen(false);
+    setViewingBook(null);
   };
 
   const handleDeleteBook = async (bookId) => {
@@ -55,6 +75,10 @@ const Dashboard = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setEditingBook(null);
+  };
+
+  const handleFilteredBooks = (filtered) => {
+    setFilteredBooks(filtered);
   };
 
   return (
@@ -139,13 +163,22 @@ const Dashboard = () => {
           </div>
         </div>
 
+        {/* Search Bar */}
+        {books.length > 0 && (
+          <SearchBar 
+            books={books} 
+            onFilteredBooks={handleFilteredBooks}
+          />
+        )}
+
         {/* Books List */}
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100">
           <div className="p-8">
             <BookList
-              books={books}
+              books={filteredBooks}
               onEdit={handleEditBook}
               onDelete={handleDeleteBook}
+              onView={handleViewBook}
               loading={loading}
             />
           </div>
@@ -164,6 +197,16 @@ const Dashboard = () => {
             loading={formLoading}
           />
         </Modal>
+
+        {/* View Book Modal */}
+        <BookViewModal
+          book={viewingBook}
+          isOpen={isViewModalOpen}
+          onClose={handleCloseViewModal}
+          onEdit={handleEditBook}
+          onDelete={handleDeleteBook}
+          maxWidth="w-full sm:w-11/12 md:w-4/5 lg:w-3/4 xl:max-w-[80vw]"
+        />
       </div>
     </div>
   );

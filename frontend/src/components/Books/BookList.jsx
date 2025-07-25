@@ -1,7 +1,7 @@
 import React from 'react';
 import BookCard from './BookCard';
 
-const BookList = ({ books, onEdit, onDelete, loading }) => {
+const BookList = ({ books, onEdit, onDelete, onView, loading }) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-16">
@@ -42,6 +42,7 @@ const BookList = ({ books, onEdit, onDelete, loading }) => {
             book={book}
             onEdit={onEdit}
             onDelete={onDelete}
+            onView={onView}
           />
         </div>
       ))}
