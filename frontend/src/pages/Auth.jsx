@@ -39,16 +39,6 @@ const Auth = () => {
           {isLogin ? <LoginForm /> : <SignupForm />}
         </div>
 
-        <div className="text-center">
-          <div className="flex items-center justify-center space-x-4 mb-4">
-            <div className="flex-1 h-px bg-gray-300"></div>
-            <span className="text-sm text-gray-500">Quick Demo</span>
-            <div className="flex-1 h-px bg-gray-300"></div>
-          </div>
-          <p className="text-xs text-gray-500">
-            Use demo@example.com / demo123 to try the application
-          </p>
-        </div>
       </div>
     </div>
   );
