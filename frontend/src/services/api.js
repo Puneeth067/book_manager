@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { getToken, removeToken } from '../utils/auth';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL;
+
+if (!API_URL) {
+  throw new Error('VITE_API_URL is not defined. Please set it in your .env file.');
+}
 
 const api = axios.create({
   baseURL: API_URL,
