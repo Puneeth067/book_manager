@@ -32,6 +32,7 @@ model Book {
   title       String
   author      String
   description String?
+  cover_image String?  // NEW: Cover image field (URL or file path)
   userId      String
   user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())

@@ -7,8 +7,10 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
     title: '',
     author: '',
     description: '',
+    cover_image: '',
   });
   const [errors, setErrors] = useState({});
+  const [imagePreview, setImagePreview] = useState('');
 
   useEffect(() => {
     if (book) {
@@ -16,7 +18,9 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
         title: book.title || '',
         author: book.author || '',
         description: book.description || '',
+        cover_image: book.cover_image || '',
       });
+      setImagePreview(book.cover_image || '');
     }
   }, [book]);
 
@@ -26,6 +30,12 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
       ...prev,
       [name]: value
     }));
+
+    // Update image preview for cover_image
+    if (name === 'cover_image') {
+      setImagePreview(value);
+    }
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
@@ -41,8 +51,22 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
     if (!formData.title.trim()) newErrors.title = 'Title is required';
     if (!formData.author.trim()) newErrors.author = 'Author is required';
     
+    // Validate cover_image URL if provided
+    if (formData.cover_image && !isValidUrl(formData.cover_image)) {
+      newErrors.cover_image = 'Please enter a valid image URL';
+    }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const isValidUrl = (string) => {
+    try {
+      const url = new URL(string);
+      return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch {
+      return false;
+    }
   };
 
   const handleSubmit = (e) => {
@@ -51,6 +75,10 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
     if (!validateForm()) return;
     
     onSubmit(formData);
+  };
+
+  const handleImageError = () => {
+    setImagePreview('');
   };
 
   return (
@@ -74,6 +102,35 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
         error={errors.author}
         placeholder="Enter author name"
       />
+
+      <Input
+        label="🖼️ Cover Image URL"
+        type="url"
+        name="cover_image"
+        value={formData.cover_image}
+        onChange={handleChange}
+        error={errors.cover_image}
+        placeholder="https://example.com/book-cover.jpg (optional)"
+      />
+
+      {/* Image Preview */}
+      {imagePreview && (
+        <div className="space-y-2">
+          <label className="block text-sm font-semibold text-gray-700">
+            🔍 Cover Preview
+          </label>
+          <div className="flex justify-center">
+            <div className="w-32 h-40 border-2 border-gray-200 rounded-lg overflow-hidden bg-gray-50">
+              <img
+                src={imagePreview}
+                alt="Cover preview"
+                className="w-full h-full object-cover"
+                onError={handleImageError}
+              />
+            </div>
+          </div>
+        </div>
+      )}
       
       <div className="space-y-2">
         <label className="block text-sm font-semibold text-gray-700">
