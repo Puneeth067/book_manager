@@ -1,4 +1,3 @@
----
 
 ## 📘 Book Management App
 
@@ -23,8 +22,6 @@ book_manager/
 ├── scripts/    # Migration and rollback scripts
 ├── prisma/     # Prisma schema and migrations
 ```
-
----
 
 ## 📘 ReadMe: `client/` (Frontend)
 
