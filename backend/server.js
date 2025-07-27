@@ -1,4 +1,3 @@
-
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -26,6 +25,14 @@ app.use('/api/books', bookRoutes);
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ message: 'Server is running!' });
+});
+
+app.get('/', (req, res) => {
+  res.send('Welcome to Readix Backend API');
+});
+
+app.get('/api', (req, res) => {
+  res.send('Welcome to the Readix API');
 });
 
 // Error handling middleware
